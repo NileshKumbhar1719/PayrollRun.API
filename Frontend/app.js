@@ -49,8 +49,8 @@ async function getPayroll() {
     try {
 
         const response = await fetch(
-            `${apiUrl}/payroll?month=${month}&year=${year}`
-        );
+    `${apiUrl}/payroll/${month}/${year}`
+                         );
 
         if (!response.ok) {
             throw new Error("Payroll data not found");

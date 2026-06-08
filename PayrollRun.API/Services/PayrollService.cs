@@ -23,8 +23,8 @@ public class PayrollService : IPayrollService
         return await _payrollRepository.GetPayrollAsync(month, year);
     }
 
-    public async Task<PayslipDto?> GetPayslipAsync(int month, int year, int employeeId)
+    public async Task<PayslipDto?> GetPayslipAsync(int runId, int employeeId)
     {
-        return await _payrollRepository.GetPayslipAsync(month, year, employeeId);
+        return await _payrollRepository.GetPayslipAsync(runId, employeeId);
     }
 }

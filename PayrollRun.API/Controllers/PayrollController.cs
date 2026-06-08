@@ -49,31 +49,24 @@ public class PayrollController : ControllerBase
         }
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetPayroll(
-        [FromQuery] int month,
-        [FromQuery] int year)
+    [HttpGet("{month:int}/{year:int}")]
+    public async Task<IActionResult> GetPayroll(int month, int year)
     {
-        var result = await _payrollService.GetPayrollAsync(
-            month,
-            year);
+        var result = await _payrollService.GetPayrollAsync(month, year);
+
+        if (result == null || !result.Any())
+            return NotFound("Payroll not found");
 
         return Ok(result);
     }
 
-    [HttpGet("payslip/{month:int}/{year:int}/{employeeId:int}")]
-    public async Task<IActionResult> GetPayslip(
-    int month,
-    int year,
-    int employeeId)
+    [HttpGet("{runId:int}/slip/{employeeId:int}")]
+    public async Task<IActionResult> GetPayslip(int runId, int employeeId)
     {
-        var result = await _payrollService.GetPayslipAsync(
-            month,
-            year,
-            employeeId);
+        var result = await _payrollService.GetPayslipAsync(runId, employeeId);
 
         if (result == null)
-            return NotFound("Payslip not found for given period");
+            return NotFound("Payslip not found for given run");
 
         return Ok(result);
     }

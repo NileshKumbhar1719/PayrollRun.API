@@ -6,12 +6,8 @@ namespace PayrollRun.API.Repositories.Interfaces
     {
         Task RunPayrollAsync(int month, int year);
 
-        Task<IEnumerable<PayrollResponseDto>> GetPayrollAsync(
-            int month,
-            int year);
+        Task<IEnumerable<PayrollResponseDto>> GetPayrollAsync(int month,int year);
 
-        Task<PayslipDto?> GetPayslipAsync(
-            int runId,
-            int employeeId);
+        Task<PayslipDto?> GetPayslipAsync(int month, int year, int employeeId);
     }
 }

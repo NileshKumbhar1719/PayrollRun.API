@@ -61,17 +61,19 @@ public class PayrollController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("payslip/{runId}/{employeeId}")]
+    [HttpGet("payslip/{month:int}/{year:int}/{employeeId:int}")]
     public async Task<IActionResult> GetPayslip(
-        int runId,
-        int employeeId)
+    int month,
+    int year,
+    int employeeId)
     {
         var result = await _payrollService.GetPayslipAsync(
-            runId,
+            month,
+            year,
             employeeId);
 
         if (result == null)
-            return NotFound();
+            return NotFound("Payslip not found for given period");
 
         return Ok(result);
     }
